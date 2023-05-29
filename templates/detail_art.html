@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>{{ arts.title }}</p>
+    <p>{{ arts.year }}</p>
+    <p>{{ arts.category }}</p>
+    <p>{{ arts.desc| capfirst }}</p>
+    <img height="600" width="750" src="{{ arts.image.url }}" alt="">
+    {% if request.user|striptags == arts.artist.username|striptags %}
+        <p><a href="/edit/{{ arts.id }}/">Edit</a> | <a href="Delete/{{ arts.id }}">Delete</a> </p>
+    {% endif %}
+
+</body>
+</html>

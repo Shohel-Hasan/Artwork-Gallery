@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>User Name:{{ users.username }}</p>
+    <p>Full Name:{{ users.first_name }} {{ users.last_name }}</p>
+    <p>Email: {{ users.email }}</p>
+    {% if users.profile_picture.avater.url %}
+        <img height="200" width="200" src="{{ users.profile_picture.avater.url }}" alt="">
+    {% endif %}
+    {% if request.user|striptags == users.username|striptags %}
+        <p><a href="/edit-profile/{{ users.id }}/">Edit Profile</a></p>
+    {% endif %}
+</body>
+</html>

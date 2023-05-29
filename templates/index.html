@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if request.user.is_authenticated %}
+    <h3>Login As: <a href="/profile/{{ request.user }}/">{{ request.user }}</a></h3>
+    <h3><a href="/logout">Logout</a></h3>
+{% else %}
+    <a href="/login">Login</a>
+{% endif %}
+{% for user in users %}
+    {% if user.artwork_set.all|length > 0 %}
+        <h3>By: <a href="/details/{{ user.username }}/">{{ user.username| capfirst }}</a> </h3>
+        {% with random_artwork=user.artwork_set.all|random %}
+            <p>{{ random_artwork.title|title }}</p>
+            <img height="300" width="350" src="{{ random_artwork.image.url }}" alt="">
+        {% endwith %}
+    {% endif %}
+{% endfor %}
+</body>
+</html>
