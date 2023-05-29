@@ -12,6 +12,9 @@
             <li class="nav-item">
             <a class="nav-link" href="/profile/{{ request.user }}/">{{ request.user|title }}</a>
           </li>
+            <li class="nav-item">
+            <a class="nav-link" href="art-post/">Post Artwork</a>
+          </li>
 
             <li class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
@@ -22,7 +25,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/user-create">Signin</a>
+            <a class="nav-link" href="/user-create">Sign up</a>
              </li>
         {% endif %}
     </ul>
