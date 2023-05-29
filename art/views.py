@@ -21,7 +21,8 @@ def home(request):
 def details(request,user):
     user_artworks = Artwork.objects.filter(artist__username=user)
     context = {
-        'arts' : user_artworks
+        'arts' : user_artworks,
+        'user': user
     }
     return render(request, template_name='details.html', context=context)
 
@@ -97,26 +98,11 @@ def user_profile(request, username):
 
 def user_profile_edit(request, id):
     user = User.objects.get(id=id)
-    data = {
-        'first_name': user.first_name,
-        'last_name': user.last_name,
-        'email': user.email,
-        'avater': user.profile_picture.avater
-    }
-    forms = UserProfileEdit(initial=data)
-    avaterModel = ProfilePicture()
+    forms = UserProfileEdit(instance=user, user=user)
     if request.method == 'POST':
-        forms = UserProfileEdit(request.POST or None, request.FILES or None)
+        forms = UserProfileEdit(request.POST, request.FILES, user=user)
         if forms.is_valid():
-            fname = forms.cleaned_data['first_name']
-            lname = forms.cleaned_data['last_name']
-            email = forms.cleaned_data['email']
-            avater = forms.cleaned_data['avater']
-            user.first_name = fname
-            user.last_name = lname
-            user.email = email
-            user.profile_picture.avater = avater
-            user.save()
+            forms.save()
             return redirect('profile', username=user.username)
     return render(request, template_name='edit_profile.html', context={'form': forms})
 

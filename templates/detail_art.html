@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
     <p>{{ arts.title }}</p>
     <p>{{ arts.year }}</p>
     <p>{{ arts.category }}</p>
@@ -13,6 +9,4 @@
     {% if request.user|striptags == arts.artist.username|striptags %}
         <p><a href="/edit/{{ arts.id }}/">Edit</a> | <a href="Delete/{{ arts.id }}">Delete</a> </p>
     {% endif %}
-
-</body>
-</html>
+{% endblock %}

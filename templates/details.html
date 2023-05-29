@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for art in arts %}
-    <p><a href="/detail-art/{{ art.id }}/">{{ art.title }}</a></p>
-    <img height="200" width="250" src="{{ art.image.url }}" alt="">
-{% endfor %}
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+    <div class=""><a href="/profile/{{ user }}/" class="btn btn-success btn-block mb-2">Visit Profile</a></div>
+    <div class="row row-cols-1 row-cols-md-4">
+        {% for art in arts %}
+              <div class="col mb-4">
+                <div class="card">
+                  <img height="300px" src="{{ art.image.url }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5><a class="card-title" href="/detail-art/{{ art.id }}/">{{ art.title }}</a></h5>
+                  </div>
+                </div>
+              </div>
+        {% endfor %}
+    </div>
+{% endblock %}
